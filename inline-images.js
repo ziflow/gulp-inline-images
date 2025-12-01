@@ -4,7 +4,7 @@ const http = require('http');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
-const util = require('gulp-util');
+const PluginError = require('plugin-error');
 const through = require('through2');
 const cheerio = require('cheerio');
 
@@ -19,7 +19,7 @@ function plugin(options = {}){
 
 	return through.obj(function(file, encoding, callback){
 		if(file.isStream()){
-			this.emit('error', new util.PluginError(PLUGIN_NAME, 'Streams are not supported!'));
+			this.emit('error', new PluginError(PLUGIN_NAME, 'Streams are not supported!'));
 			return callback();
 		}
 
